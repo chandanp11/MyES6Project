@@ -44,7 +44,40 @@ const restaurant = {
   orderPasta: function (ing1, ing2, ing3) {
     console.log(`Here is your past with ${ing1}, ${ing2} and ${ing3}`);
   },
+
+  orderPizza: function (mainIngredient, ...otherIngredient) {
+    console.log(mainIngredient);
+    console.log(otherIngredient);
+  },
 };
+
+restaurant.orderPizza('tomato', 'chilli', 'potato');
+//////////////// REST OPERATOR //////////////////////////////////////////
+console.log('------------- REST OPERATOR-------------------------------');
+const [var1, var2, ...others] = [1, 2, 3, 4, 5];
+console.log(var1, var2, others);
+
+//Objects
+const { sat, ...weekdays } = restaurant.openingHours;
+console.log(sat, weekdays);
+
+const [mainMenu1, , mainMenu3, ...otherMenu] = [
+  ...restaurant.mainMenu,
+  ...restaurant.starterMenu,
+];
+console.log(mainMenu1, mainMenu3, otherMenu);
+
+const add = function (...numbers) {
+  let sum = 0;
+  for (let i = 0; i < numbers.length; i++) {
+    sum += numbers[i];
+  }
+  console.log(sum);
+};
+add(1, 2);
+add(3, 4, 5, 6);
+const var4 = [23, 34, 45];
+add(...var4);
 
 //////////////// DESTRUCTURING OBJECTS //////////////////////////////////////////
 console.log(
@@ -150,3 +183,32 @@ console.log(restaurantCopy1);
 const restaurantCopy2 = { ...restaurant };
 restaurantCopy2.name = 'Visava';
 console.log(restaurantCopy2.name, restaurant.name);
+
+// short circuit
+console.log('=== OR ===');
+console.log(0 || 3);
+console.log('' || 'chandan');
+console.log(true || 0);
+console.log(undefined || null);
+console.log(undefined || 0 || '' || 'hello' || 23 || null);
+
+// now this will not work because 0 is falsy value, even though actually there are no guests
+restaurant.numOfGuests = 0;
+const guest1 = restaurant.numOfGuests ? restaurant.numOfGuests : 10;
+console.log('guest1', guest1);
+
+const guest2 = restaurant.numOfGuests || 10;
+console.log('guest2', guest2);
+
+const guest3 = restaurant.numOfGuests ?? 10;
+console.log('guest3', guest3);
+
+console.log('----- AND ------');
+console.log(0 && 'chandan');
+
+// practical example
+if (restaurant.orderPizza) {
+  restaurant.orderPizza('tomato', 'onion');
+}
+
+restaurant.orderPizza && restaurant.orderPizza('tomato', 'onion');
