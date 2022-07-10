@@ -43,6 +43,11 @@ const restaurant = {
   orderPasta(ing1, ing2, ing3) {
     console.log(`Here is your past with ${ing1}, ${ing2} and ${ing3}`);
   },
+
+  orderPizza: function (mainIngredient, ...otherIngredient) {
+    console.log(mainIngredient);
+    console.log(otherIngredient);
+  },
 };
 
 console.log(restaurant);
