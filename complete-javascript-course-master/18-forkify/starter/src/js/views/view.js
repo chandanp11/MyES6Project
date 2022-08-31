@@ -3,30 +3,33 @@ import icons from 'url:../../img/icons.svg';
 export default class View {
   _data;
 
-  render(data) {
+  render(data, render = true) {
+    // console.log(data, Array.isArray(data), data.length === 0);
+    // if (!data || (Array.isArray(data) && data.length === 0))
     if (!data || (Array.isArray(data) && data.length === 0))
       return this.renderError();
 
     this._data = data;
     const markup = this._generateMarkup();
+    if (!render) return markup;
     this._clear();
     this._parenetEl.insertAdjacentHTML('afterbegin', markup);
   }
 
-  update(data) {
-    if (!data || (Array.isArray(data) && data.length === 0))
-      return this.renderError();
+  // update(data) {
+  //   if (!data || (Array.isArray(data) && data.length === 0))
+  //     return this.renderError();
 
-    this._data = data;
-    const newMarkup = this._generateMarkup();
-    const newDOM = document.createRange().createContextualFragment(newMarkup);
-    const newElements = Array.from(newDOM.querySelectorAll('*'));
-    const currElements = Array.from(this._parenetEl.querySelectorAll('*'));
-    newElements.forEach((newEl, i) => {
-      const currEl = currElements[i];
-      console.log(currEl, newEl.isEqualNode(currEl));
-    });
-  }
+  //   this._data = data;
+  //   const newMarkup = this._generateMarkup();
+  //   const newDOM = document.createRange().createContextualFragment(newMarkup);
+  //   const newElements = Array.from(newDOM.querySelectorAll('*'));
+  //   const currElements = Array.from(this._parenetEl.querySelectorAll('*'));
+  //   newElements.forEach((newEl, i) => {
+  //     const currEl = currElements[i];
+  //     console.log(currEl, newEl.isEqualNode(currEl));
+  //   });
+  // }
 
   _clear() {
     this._parenetEl.innerHTML = '';

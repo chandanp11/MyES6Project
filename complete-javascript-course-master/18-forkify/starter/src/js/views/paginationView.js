@@ -21,8 +21,6 @@ class PaginationView extends View {
       this._data.results.length / this._data.resultsPerPage
     );
 
-    console.log(numPages);
-
     if (currPage === 1 && numPages > 1) {
       return `
         <button data-goto="${
